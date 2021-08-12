@@ -6,7 +6,7 @@ class MockRequestHandler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def processRequest(self, method):
-        (base_path, query) = self.path.split("?")
+        (base_path, _) = self.path.split("?") if "?" in self.path else (self.path, "")
         directory = os.path.dirname(base_path)
         filename = f'{method}_{os.path.basename(base_path)}.json'
         fullpath = os.path.join(
