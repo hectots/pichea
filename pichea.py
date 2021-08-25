@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
 import sys
