@@ -61,11 +61,11 @@ if __name__ == "__main__":
     parser.add_argument("--save-request", "-s",
                         action='store_true', help="Saves requests to a file.")
     parser.add_argument(
-        "mock_path", help="Base path to JSON files. Default is the current directory.")
+        "--port", "-p", help="Server's port number.", type=int, default=8282)
 
     args = parser.parse_args()
 
-    s = ThreadingHTTPServer(('localhost', 8282), type("MockRequestHandlerAug", (MockRequestHandler,), dict(
+    s = ThreadingHTTPServer(('localhost', args.port), type("MockRequestHandlerAug", (MockRequestHandler,), dict(
         mock_path=args.mock_path, save_request=args.save_request)))
     s.serve_forever()
     s.server_close()
