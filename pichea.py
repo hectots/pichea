@@ -62,6 +62,8 @@ if __name__ == "__main__":
                         action='store_true', help="Saves requests to a file.")
     parser.add_argument(
         "--port", "-p", help="Server's port number.", type=int, default=8282)
+    parser.add_argument(
+        "mock_path", help="Base path to JSON files. Default is the current directory.", nargs='?', default=os.getcwd())
 
     args = parser.parse_args()
 
