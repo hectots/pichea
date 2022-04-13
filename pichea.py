@@ -14,17 +14,17 @@ class MockRequestHandler(BaseHTTPRequestHandler):
         directory = os.path.dirname(base_path)
 
         if self.save_request:
-            requestFileName = f'{method}_{os.path.basename(base_path)}.request.txt'
-            requestFileFullPath = os.path.join(
+            request_file_name = f'{method}.request.txt'
+            request_file_full_path = os.path.join(
                 self.mock_path,
                 directory[1:],  # Deletes starting '/'
-                requestFileName)
+                request_file_name)
 
-            with open(requestFileFullPath, 'wb') as request_file:
+            with open(request_file_full_path, 'wb') as request_file:
                 request_file.write(self.rfile.read(
                     int(self.headers["Content-Length"])))
 
-        filename = f'{method}_{os.path.basename(base_path)}.json'
+        filename = f'{method}.json'
         fullpath = os.path.join(
             self.mock_path,
             directory[1:],  # Deletes starting '/'
