@@ -9,15 +9,11 @@ class MockRequestHandler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def processRequest(self, method):
-        (base_path, _) = self.path.split(
-            "?") if "?" in self.path else (self.path, "")
-        directory = os.path.dirname(base_path)
-
         if self.save_request:
             request_file_name = f'{method}.request.txt'
             request_file_full_path = os.path.join(
                 self.mock_path,
-                directory[1:],  # Deletes starting '/'
+                self.path[1:],
                 request_file_name)
 
             with open(request_file_full_path, 'wb') as request_file:
@@ -27,7 +23,7 @@ class MockRequestHandler(BaseHTTPRequestHandler):
         filename = f'{method}.json'
         fullpath = os.path.join(
             self.mock_path,
-            directory[1:],  # Deletes starting '/'
+            self.path[1:],
             filename)
 
         body = ""
